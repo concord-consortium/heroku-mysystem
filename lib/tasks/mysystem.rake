@@ -66,4 +66,8 @@ namespace :mysys do
       FileUtils.cp(from_path,to_path)
     end
   end
+
+  desc "build mysystem runtime"
+  task :make => :copy_files
+
 end
