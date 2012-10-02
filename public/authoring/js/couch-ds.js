@@ -70,7 +70,6 @@ msaPreview.CouchDS.prototype =
             }
 
           });
-          
          
           callback(response);
         }
@@ -91,10 +90,6 @@ msaPreview.CouchDS.prototype =
       clip.setText(url);
       clip.setHandCursor( true );
       clip.setCSSEffects( true );                  
-      
-      clip.addEventListener( 'load', function(client) {
-        alert( "movie is loaded" );
-      } );
       
       clip.addEventListener( 'onComplete',function() {
         alert('a link to this diagram is now in your clipboard.');
