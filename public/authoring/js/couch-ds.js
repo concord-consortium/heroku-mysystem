@@ -58,15 +58,19 @@ msaPreview.CouchDS.prototype =
       { 
         success: function(response) { 
           console.log("Saved ok, id = "+response.id);
-          window.location.hash = (self.authoredDocId || "") + (self.learnerDocId ? "/"+self.learnerDocId : "");
+          window.location.hash = (self.authoredDocId || "") + (self.learnerDocId ? "/"+self.learnerDocId : "/" + response.id);
           var url = window.location.href;
+          window.location.href = url;
           var gritId = $.gritter.add({
             title: 'Data saved.',
             text: url,
-            sticky: true
+            sticky: true,
+            after_open: function(e) {
+              self.makeCopyLink(e,url);
+            }
+
           });
-          var domElement = $('#gritter-item-'+gritId);
-          self.makeCopyLink(domElement.find('p'),url);
+          
          
           callback(response);
         }
@@ -74,7 +78,8 @@ msaPreview.CouchDS.prototype =
     );
   },
 
-  makeCopyLink: function(textElement,url) {
+  makeCopyLink: function(element,url) {
+    var textElement = element.find('p');
     var length = url.length > 6 ? url.length - 6 : url.length;
     var short_id = url.substr(length);
     var a = $('<a id="clip_link" href="'+ url + '"> Copy your link to to the clipboard. ('+ short_id + ')</a>');
@@ -82,8 +87,15 @@ msaPreview.CouchDS.prototype =
     textElement.html(a);
     if (typeof ZeroClipboard !=='undefined') {
       var clip = new ZeroClipboard.Client();
+      clip.glue(a[0],element[0]);
       clip.setText(url);
-      clip.glue('clip_link');
+      clip.setHandCursor( true );
+      clip.setCSSEffects( true );                  
+      
+      clip.addEventListener( 'load', function(client) {
+        alert( "movie is loaded" );
+      } );
+      
       clip.addEventListener( 'onComplete',function() {
         alert('a link to this diagram is now in your clipboard.');
       });
