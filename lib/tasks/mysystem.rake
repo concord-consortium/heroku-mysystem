@@ -46,13 +46,13 @@ namespace :mysys do
     Dir.chdir @public_path do
       from_path = @static_path
       to_path = File.join(@public_path,'static')
-      FileUtils.rm_rf(File.join(@public_path,'index.html'))
       FileUtils.rm_rf(to_path)
       FileUtils.cp_r(from_path, to_path) 
 
-      # link index file:
-      index_file = `find #{to_path} -name index.html`.strip
-      FileUtils.cp(index_file, @public_path)
+      # copy the runtime index.html to mysystem.html
+      from_path = `find #{to_path} -name index.html`.strip
+      to_path = File.join(@public_path,'mysystem.html')
+      FileUtils.cp(from_path, to_path)
 
       # copy the authoring folder:
       from_path = File.join(@checkout_path,'public','authoring')
@@ -61,9 +61,9 @@ namespace :mysys do
       FileUtils.cp_r(from_path, to_path)
 
       #add our authoring.html file:
-      from_path = File.join(@public_path,'authoring.html')
-      to_path = File.join(@public_path,'authoring','authoring.html')
-      FileUtils.cp(from_path,to_path)
+      # from_path = File.join(@public_path,'authoring.html')
+      # to_path = File.join(@public_path,'authoring','authoring.html')
+      # FileUtils.cp(from_path,to_path)
     end
   end
 

@@ -5,14 +5,14 @@
 
   <title>MySystem Authoring</title>
   <!-- <link rel="stylesheet" href="css/style.css?v=2"> -->
-  <link rel="stylesheet" href="css/custom.css">
-  <link rel="stylesheet" href="css/jquery.gritter.css">
+  <link rel="stylesheet" href="./authoring/css/custom.css">
+  <link rel="stylesheet" href="./authoring/css/jquery.gritter.css">
 
-  <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js"></script>
-  <script type="text/javascript" src="js/libs/jquery.couch.js"></script>
-  <script type="text/javascript" src="js/libs/jquery.gritter.min.js"></script>
-  <script type="text/javascript" src="js/libs/ZeroClipboard.min.js"></script>
-  <script type="text/javascript" src="js/couch-ds.js"></script>
+  <script type="text/javascript" src="./authoring/js/libs/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="./authoring/js/libs/jquery.couch.js"></script>
+  <script type="text/javascript" src="./authoring/js/libs/jquery.gritter.min.js"></script>
+  <script type="text/javascript" src="./authoring/js/libs/ZeroClipboard.min.js"></script>
+  <script type="text/javascript" src="./authoring/js/couch-ds.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {  
 
@@ -67,14 +67,9 @@
           dataStore.saveAuthoring()
         });
 
-        // register save function on internal MySystem app's save button
-        // This is all complicated here just because we want to disable saving and autosaving
-        // by default, and turn them on using checkboxes. If we just wanted the save button to
-        // work always, we would simply need to call
 
         runtimeContent.MySystem.registerExternalSaveFunction(dataStore.saveLearner, dataStore);
-        runtimeContent.MySystem.setAutoSaveFrequency(-1); // start with no auto save
-        
+        runtimeContent.MySystem.setAutoSaveFrequency(-1); // start with no auto save        
       };
       
 
@@ -105,8 +100,8 @@
 
      }; // bothIframesLoaded
 
-    createIframe('../index.html', 'runtime-iframe', $('#runtime_td'), function(iframe){
-        createIframe('index.html', authorIframeId, $('#authoring_td'), function(iframe){
+    createIframe('mysystem.html', 'runtime-iframe', $('#runtime_td'), function(iframe){
+        createIframe('./authoring/index.html', authorIframeId, $('#authoring_td'), function(iframe){
           bothIframesLoaded();
           // setTimeout(bothIframesLoaded,1000);
         });
@@ -123,13 +118,6 @@
         <button id="save_authoring">Save authored activity</button>
       </td>
       <td width="50%" id="runtime_td" style="text-align: right">
-        <!-- <span class="options_disabled">
-          <input type="checkbox" id="save_external" disabled>Enable diagram saving &nbsp;&nbsp;
-          <span class="options_disabled">
-            <input type="checkbox" id="autosave_external" disabled>Autosave every
-            <input type="text" size="2" value="20" id="autosave_time" disabled> seconds
-          </span>
-        </span> -->
       </td>
     </tr>
   </table>
