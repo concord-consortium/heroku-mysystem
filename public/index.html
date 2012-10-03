@@ -72,15 +72,6 @@
       };
 
       var configureSaving = function(dataStore, runtimeContent, authorContent) {
-        
-        // register save function on Save Authored Activity button
-        $('#save_authoring').click(function(){
-          var promptValue = $('#prompt').val();
-          authorContent.MSA.dataController.activity.set('prompt',promptValue);
-          dataStore.saveAuthoring()
-        });
-
-
         runtimeContent.MySystem.registerExternalSaveFunction(dataStore.saveLearner, dataStore);
         runtimeContent.MySystem.setAutoSaveFrequency(-1); // start with no auto save        
       };
@@ -125,8 +116,8 @@
 <body>
   <div style="display: none;" id="authoring_td"><button id="save_authoring">Save authored activity</button></div>
   <div style="width: 100%;text-align: right;" id="runtime_td">
-    <span class="options_disabled">
-      <input type="checkbox" id="save_external" disabled>Enable diagram saving</input>
+    <span id="runtime_url">
+      
     </span>
   </div>
 

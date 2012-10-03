@@ -71,14 +71,9 @@
       };
 
       var configureSaving = function(dataStore, runtimeContent, authorContent) {
-        
-        // register save function on Save Authored Activity button
         $('#save_authoring').click(function(){
-          var promptValue = $('#prompt').val();
-          authorContent.MSA.dataController.activity.set('prompt',promptValue);
           dataStore.saveAuthoring()
         });
-
 
         runtimeContent.MySystem.registerExternalSaveFunction(dataStore.saveLearner, dataStore);
         runtimeContent.MySystem.setAutoSaveFrequency(-1); // start with no auto save        
