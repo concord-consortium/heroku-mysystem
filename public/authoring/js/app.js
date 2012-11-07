@@ -83,7 +83,12 @@ MSA.setupParentIFrame = function(dataHash, updateObject, updateFn, scoreFn) {
 
   MSA.dataController.loadData(dataHash);
 
-  MSA.dataController.addObserver('data', updateObject, updateFn);
+  var _update_function = function() {
+    var data = MSA.dataController.get('data');
+    updateFn(data);
+  };
+
+  MSA.dataController.addObserver('data', MSA.dataController, _update_function);
   MSA.rubricCategoriesController.set('scoreFunction',scoreFn);
 };
 
@@ -497,6 +502,13 @@ MSA.LinkView = Ember.View.extend({
   templateName: 'link-template',
   remove: function() {
     MSA.energyTypesController.removeObject(this.get('link'));
+  }
+});
+
+MSA.CategoryView = Ember.View.extend({
+  templateName: 'category-template',
+  remove: function() {
+    MSA.rubricCategoriesController.removeObject(this.get('category'));
   }
 });
 
