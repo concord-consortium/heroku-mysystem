@@ -6,6 +6,8 @@ You can demo the experience over at: [mysystem][demo-site]
 
 The MySystem runtime is maintained at the [concord mysystem git repo][git-site] 
 
+## Using ##
+To author, visit: [webapp]/authoring.html
 
 ## Buidling and deploying ##
 
